@@ -11,6 +11,8 @@ lint = "ruff check --fix user tests"
 
 [dev-packages]
 ruff = "~=0.4.3"
+pytest = "~=8.2"
+assertpy = "~=1.1"
 
 [requires]
 python_version = "3.12"
