@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+format = "ruff format user tests"
+lint = "ruff check --fix user tests"
+
+[packages]
+
+[dev-packages]
+ruff = "~=0.4.3"
+
+[requires]
+python_version = "3.12"
+python_full_version = "3.12.3"
