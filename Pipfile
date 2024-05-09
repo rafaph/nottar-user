@@ -7,7 +7,7 @@ name = "pypi"
 format = "ruff format user tests"
 lint = "sh -c 'ruff check --fix user tests && mypy user tests'"
 test = "pytest tests"
-test-cov = "pytest --cov-branch --cov-fail-under=15 --cov=user --cov-report term --cov-report xml:coverage/coverage.xml --cov-report html:coverage --cov-report lcov:coverage/lcov.info tests"
+test-cov = "pytest --cov-branch --cov-fail-under=66 --cov=user --cov-report term --cov-report xml:coverage/coverage.xml --cov-report html:coverage --cov-report lcov:coverage/lcov.info tests"
 install-hooks = "pre-commit install"
 
 [packages]

@@ -21,7 +21,7 @@ class UserMongo(Document):
     def to_user(self) -> User:
         return User.model_validate(
             {
-                "id": self.id,
+                "id": str(self.id),
                 "first_name": self.first_name,
                 "last_name": self.last_name,
                 "email": self.email,
