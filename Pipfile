@@ -7,12 +7,14 @@ name = "pypi"
 format = "ruff format user tests"
 lint = "sh -c 'ruff check --fix user tests && mypy user tests'"
 test = "pytest tests"
+test-cov = "pytest --cov-branch --cov-fail-under=15 --cov=user --cov-report term --cov-report xml:coverage/coverage.xml --cov-report html:coverage --cov-report lcov:coverage/lcov.info tests"
+install-hooks = "pre-commit install"
 
 [packages]
 pydantic = "~=2.7"
 email-validator = "~=2.1"
 mongoengine = "~=0.28.2"
-mongo-types = "~=0.15.1"
+pydash = "~=8.0"
 
 [dev-packages]
 ruff = "~=0.4.3"
@@ -22,6 +24,8 @@ pre-commit = "~=3.7"
 mypy = "~=1.10"
 pytest-faker = "~=2.0"
 pytest-testdox = "~=3.1"
+mongo-types = "~=0.15.1"
+pytest-cov = "~=5.0"
 
 [requires]
 python_version = "3.12"

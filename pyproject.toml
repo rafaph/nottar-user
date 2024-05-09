@@ -77,6 +77,8 @@ ignore = [
   "ANN101",
   # mutable-class-default
   "RUF012",
+  # missing-type-cls
+  "ANN102",
 ]
 
 [tool.mypy]
