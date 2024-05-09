@@ -16,6 +16,7 @@ class Controller(ABC, Generic[RequestBody, ResponseBody]):
 
     @abstractmethod
     def execute(
-        self: "Controller", request: Request[RequestBody],
+        self: "Controller",
+        request: Request[RequestBody],
     ) -> Response[ResponseBody]:
         raise NotImplementedError
