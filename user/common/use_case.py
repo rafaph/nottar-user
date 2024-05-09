@@ -8,4 +8,4 @@ Output = TypeVar("Output")
 class UseCase(ABC, Generic[Input, Output]):
     @abstractmethod
     def execute(self, input_data: Input) -> Output:
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover

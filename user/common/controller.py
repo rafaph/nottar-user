@@ -12,11 +12,11 @@ class Controller(ABC, Generic[RequestBody, ResponseBody]):
     @property
     @abstractmethod
     def path(self) -> str:
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     @abstractmethod
     def execute(
         self,
         request: Request[RequestBody],
     ) -> Response[ResponseBody]:
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
