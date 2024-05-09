@@ -1,3 +1,4 @@
+from bson import ObjectId
 from faker import Faker
 
 from user.domain.models.user import User
@@ -7,7 +8,7 @@ class UserBuilder:
     _faker = Faker("en_US")
 
     def __init__(self) -> None:
-        self._id = self._faker.uuid4()
+        self._id = str(ObjectId())
         self._email = self._faker.email()
         self._first_name = self._faker.first_name()
         self._last_name = self._faker.last_name()

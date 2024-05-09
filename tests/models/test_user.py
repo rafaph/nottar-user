@@ -7,7 +7,7 @@ from user.domain.models.user import User
 
 @pytest.mark.describe(User.__name__)
 class TestUser:
-    @pytest.mark.it("Should raise ValidationError when id is not a uuid")
+    @pytest.mark.it("Should raise ValidationError when id is not an ObjectId")
     def test_raise_id_property(self) -> None:
         with pytest.raises(ValidationError):
             UserBuilder().with_id("test").build()
@@ -37,3 +37,7 @@ class TestUser:
     def test_raise_password_property(self) -> None:
         with pytest.raises(ValidationError):
             UserBuilder().with_password("").build()
+
+    @pytest.mark.it("Should not raise ValidationError")
+    def test_not_rise(self) -> None:
+        UserBuilder().build()

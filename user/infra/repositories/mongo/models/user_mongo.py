@@ -5,7 +5,7 @@ from user.infra.repositories.mongo.models.query_set_manager import QuerySetManag
 
 
 class UserMongo(Document):
-    id = fields.StringField(primary_key=True)
+    id = fields.ObjectIdField(primary_key=True, required=True)
     first_name = fields.StringField(required=True)
     last_name = fields.StringField(required=True)
     email = fields.StringField(required=True, unique=True)
@@ -19,18 +19,20 @@ class UserMongo(Document):
     }
 
     def to_user(self) -> User:
-        return User(
-            id=self.id,
-            first_name=self.first_name,
-            last_name=self.last_name,
-            email=self.email,
-            password=self.password,
+        return User.model_validate(
+            {
+                "id": self.id,
+                "first_name": self.first_name,
+                "last_name": self.last_name,
+                "email": self.email,
+                "password": self.password,
+            }
         )
 
     @staticmethod
     def from_user(user: User) -> "UserMongo":
         return UserMongo(
-            id=str(user.id),
+            id=user.id,
             first_name=user.first_name,
             last_name=user.last_name,
             email=user.email,
