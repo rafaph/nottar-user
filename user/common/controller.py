@@ -11,12 +11,12 @@ ResponseBody = TypeVar("ResponseBody")
 class Controller(ABC, Generic[RequestBody, ResponseBody]):
     @property
     @abstractmethod
-    def path(self: "Controller") -> str:
+    def path(self) -> str:
         raise NotImplementedError
 
     @abstractmethod
     def execute(
-        self: "Controller",
+        self,
         request: Request[RequestBody],
     ) -> Response[ResponseBody]:
         raise NotImplementedError

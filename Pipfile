@@ -5,7 +5,7 @@ name = "pypi"
 
 [scripts]
 format = "ruff format user tests"
-lint = "ruff check --fix user tests"
+lint = "sh -c 'ruff check --fix user tests && mypy user tests'"
 
 [packages]
 
@@ -14,6 +14,7 @@ ruff = "~=0.4.3"
 pytest = "~=8.2"
 assertpy = "~=1.1"
 pre-commit = "~=3.7"
+mypy = "~=1.10"
 
 [requires]
 python_version = "3.12"

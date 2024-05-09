@@ -73,4 +73,21 @@ ignore = [
   "COM812",
   # single-line-implicit-string-concatenation
   "ISC001",
+  # missing-type-self
+  "ANN101",
 ]
+
+[tool.mypy]
+python_version = "3.12"
+pretty = true
+strict = true
+warn_unreachable = true
+disallow_any_explicit = true
+disallow_any_decorated = true
+disallow_any_unimported = true
+
+[[tool.mypy.overrides]]
+module = [
+  "assertpy",
+]
+ignore_missing_imports = true
