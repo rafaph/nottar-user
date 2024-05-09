@@ -1,5 +1,5 @@
 [tool.ruff]
-target-version = "py311"
+target-version = "py312"
 line-length = 88
 
 [tool.ruff.lint]
@@ -67,4 +67,10 @@ select = [
     "PT",
     # isort
     "I",
+]
+ignore = [
+  # missing-trailing-comma
+  "COM812",
+  # single-line-implicit-string-concatenation
+  "ISC001",
 ]
