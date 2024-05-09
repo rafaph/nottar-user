@@ -75,19 +75,33 @@ ignore = [
   "ISC001",
   # missing-type-self
   "ANN101",
+  # mutable-class-default
+  "RUF012",
 ]
 
 [tool.mypy]
 python_version = "3.12"
+plugins = [
+  "pydantic.mypy",
+]
 pretty = true
 strict = true
 warn_unreachable = true
 disallow_any_explicit = true
 disallow_any_decorated = true
 disallow_any_unimported = true
+disallow_untyped_defs = true
 
 [[tool.mypy.overrides]]
 module = [
   "assertpy",
 ]
 ignore_missing_imports = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+[tool.pytest.ini_options]
+addopts = "--testdox -s -x -vv"
