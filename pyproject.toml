@@ -1,0 +1,122 @@
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    "W",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # mccabe
+    "C90",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # flake8-annotations
+    "ANN",
+    # flake8-type-checking
+    "TCH",
+    # flake8-logging
+    "LOG",
+    # flake8-logging-format
+    "G",
+    # flake8-errmsg
+    "EM",
+    # flake8-implicit-str-concat
+    "ISC",
+    # flake8-import-conventions
+    "ICN",
+    # flake8-self
+    "SLF",
+    # flake8-unused-arguments
+    "ARG",
+    # flake8-return
+    "RET",
+    # flake8-pie
+    "PIE",
+    # flake8-pyi,
+    "PYI",
+    # flake8-quotes,
+    "Q",
+    # flake8-builtins
+    "A",
+    # flake8-commas
+    "COM",
+    # flake8-boolean-trap
+    "FBT",
+    # flake8-comprehensions
+    "C4",
+    # flake8-datetimez
+    "DTZ",
+    # flake8-bandit
+    "S",
+    # flake8-use-pathlib
+    "PTH",
+    # Pylint
+    "PL",
+    # Ruff-specific rules
+    "RUF",
+    # Perflint
+    "PERF",
+    # flake8-pytest-style,
+    "PT",
+    # isort
+    "I",
+]
+ignore = [
+  # missing-trailing-comma
+  "COM812",
+  # single-line-implicit-string-concatenation
+  "ISC001",
+  # missing-type-self
+  "ANN101",
+  # mutable-class-default
+  "RUF012",
+  # missing-type-cls
+  "ANN102",
+  # non-pep695-type-alias (mypy does not support yet)
+  "UP040",
+  # subprocess-without-shell-equals-true
+  "S603",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+  "B009",
+  "TCH003",
+]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = [
+  "pydantic.mypy",
+]
+pretty = true
+strict = true
+warn_unreachable = true
+disallow_any_explicit = true
+disallow_any_decorated = true
+disallow_any_unimported = true
+disallow_untyped_defs = true
+disable_error_code = [
+  "type-abstract",
+]
+
+[[tool.mypy.overrides]]
+module = [
+  "assertpy",
+]
+ignore_missing_imports = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+[tool.pytest.ini_options]
+addopts = "--testdox -s -x -vv"
