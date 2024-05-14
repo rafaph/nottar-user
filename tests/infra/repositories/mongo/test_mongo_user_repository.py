@@ -1,95 +1,126 @@
-import pydash as _
 import pytest
 from assertpy import assert_that
-from bson import ObjectId
 
-from tests.builders.domain.models.user_builder import UserBuilder
-from tests.utils.database_test import DatabaseTest
-from user.infra.repositories.mongo.mongo_user_repository import MongoUserRespository
+from tests.builders.domain.models import UserBuilder
+from tests.helpers import DatabaseTest
+from user.domain.errors import UserNotFoundError
+from user.infra.repositories.mongo import MongoUserRepository
 
 
-@pytest.mark.describe(MongoUserRespository.__name__)
-class TestMongoUserRespository:
+@pytest.mark.anyio(scope="class")
+@pytest.mark.describe(MongoUserRepository.__name__)
+class TestMongoUserRepository:
     @pytest.mark.it("Should create the user")
-    def test_should_create_user(self) -> None:
-        with DatabaseTest() as dt:
+    async def test_should_create_user(self) -> None:
+        async with DatabaseTest() as db:
             # given
             user = UserBuilder().build()
+            sut = MongoUserRepository()
 
             # when
-            MongoUserRespository().create(user)
+            await sut.create(user)
 
             # then
-            user_mongo = dt.db_assert.find_one("users", {"_id": ObjectId(user.id)})
-            assert_that(user_mongo).is_not_none()
+            user_from_db = await db.find_user(user.id)
+            assert_that(user_from_db).is_equal_to(user)
 
     @pytest.mark.it("Should retrieve the user by id")
-    def test_retrieve_user(self) -> None:
-        with DatabaseTest() as dt:
+    async def test_retrieve_user(self) -> None:
+        async with DatabaseTest() as db:
             # given
             user = UserBuilder().build()
-            data = user.model_dump(mode="json")
-            _id = ObjectId(data.pop("id"))
-            dt.db_assert.create("users", {"_id": _id, **data})
+            await db.create_user(user)
+            sut = MongoUserRepository()
 
             # when
-            user_from_db = MongoUserRespository().retrieve(user.id)
+            user_from_db = await sut.retrieve(user.id)
 
             # then
             assert_that(user_from_db).is_equal_to(user)
 
-    @pytest.mark.it("Should update the user")
-    def test_update_user(self) -> None:
-        with DatabaseTest() as dt:
+    @pytest.mark.it(
+        "Should raise UserNotFoundError when trying to retrieve a "
+        "user by id that does not exist"
+    )
+    async def test_retrieve_raise_user_not_found(self) -> None:
+        async with DatabaseTest():
             # given
             user = UserBuilder().build()
-            data = user.model_dump(mode="json")
-            _id = ObjectId(data.pop("id"))
-            dt.db_assert.create("users", {"_id": _id, **data})
+            sut = MongoUserRepository()
+
+            # when/then
+            with pytest.raises(UserNotFoundError):
+                await sut.retrieve(user.id)
+
+    @pytest.mark.it("Should retrieve the user by email")
+    async def test_retrieve_user_email(self) -> None:
+        async with DatabaseTest() as db:
+            # given
+            user = UserBuilder().build()
+            await db.create_user(user)
+            sut = MongoUserRepository()
+
+            # when
+            user_from_db = await sut.retrieve_by_email(user.email)
+
+            # then
+            assert_that(user_from_db).is_equal_to(user)
+
+    @pytest.mark.it(
+        "Should raise UserNotFoundError when trying to retrieve a "
+        "user by email that does not exist"
+    )
+    async def test_retrieve_raise_user_email_not_found(self) -> None:
+        async with DatabaseTest():
+            # given
+            user = UserBuilder().build()
+            sut = MongoUserRepository()
+
+            # when/then
+            with pytest.raises(UserNotFoundError):
+                await sut.retrieve_by_email(user.email)
+
+    @pytest.mark.it("Should update the user")
+    async def test_update_user(self) -> None:
+        async with DatabaseTest() as db:
+            # given
+            user = UserBuilder().build()
+            await db.create_user(user)
+            sut = MongoUserRepository()
             user_to_update = UserBuilder().with_id(user.id).build()
 
             # when
-            MongoUserRespository().update(user_to_update)
+            await sut.update(user_to_update)
 
             # then
-            user_from_db = dt.db_assert.find_one("users", {"_id": _id})
-            assert_that(user_from_db).is_not_none()
-            assert_that(
-                _.omit(user_from_db, "_id"),
-            ).is_equal_to(
-                _.omit(user_to_update.model_dump(mode="json"), "id"),
-            )
+            user_from_db = await db.find_user(user.id)
+            assert_that(user_from_db).is_equal_to(user_to_update)
 
-    @pytest.mark.it("Should not update an user if he does not exist")
-    def test_not_update_user(self) -> None:
-        # given
-        user = UserBuilder().build()
-
-        # when/then
-        with DatabaseTest(), pytest.raises(Exception, match="User not found"):
-            MongoUserRespository().update(user)
-
-    @pytest.mark.it("Should delete the user")
-    def test_delete_user(self) -> None:
-        with DatabaseTest() as dt:
+    @pytest.mark.it(
+        "Should raise UserNotFoundError when trying to update a "
+        "user that does not exist"
+    )
+    async def test_update_raise_user_not_found(self) -> None:
+        async with DatabaseTest():
             # given
             user = UserBuilder().build()
-            data = user.model_dump(mode="json")
-            _id = ObjectId(data.pop("id"))
-            dt.db_assert.create("users", {"_id": _id, **data})
+            sut = MongoUserRepository()
+
+            # when/then
+            with pytest.raises(UserNotFoundError):
+                await sut.update(user)
+
+    @pytest.mark.it("Should delete the user")
+    async def test_delete_user(self) -> None:
+        async with DatabaseTest() as db:
+            # given
+            user = UserBuilder().build()
+            await db.create_user(user)
+            sut = MongoUserRepository()
 
             # when
-            MongoUserRespository().delete(user.id)
+            await sut.delete(user.id)
 
             # then
-            user_from_db = dt.db_assert.find_one("users", {"_id": _id})
+            user_from_db = await db.find_user(user.id)
             assert_that(user_from_db).is_none()
-
-    @pytest.mark.it("Should not delete an user if he does not exist")
-    def test_not_delete_user(self) -> None:
-        # given
-        user = UserBuilder().build()
-
-        # when/then
-        with DatabaseTest(), pytest.raises(Exception, match="User not found"):
-            MongoUserRespository().delete(user.id)

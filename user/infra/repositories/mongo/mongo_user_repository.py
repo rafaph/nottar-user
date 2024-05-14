@@ -1,31 +1,48 @@
 import pydash as _
+from beanie import PydanticObjectId
 
-from user.domain.models.user import User
-from user.domain.repositories.user_repository import UserRepository
-from user.infra.repositories.mongo.models.user_mongo import UserMongo
+from user.domain.errors import UserNotFoundError
+from user.domain.models import User
+from user.domain.repositories import UserRepository
+from user.infra.repositories.mongo.models import UserMongo
 
 
-class MongoUserRespository(UserRepository):
-    def create(self, user: User) -> None:
-        user_mongo = UserMongo.from_user(user)
-        user_mongo.save()
+class MongoUserRepository(UserRepository):
+    async def create(self, user: User) -> None:
+        user_mongo = UserMongo.from_domain(user)
+        await user_mongo.create()
 
-    def update(self, user: User) -> None:
-        total_updated = UserMongo.objects.filter(id=user.id).update(
-            **_.omit(user.model_dump(mode="json"), "id")
+    async def retrieve(self, user_id: str) -> User:
+        user_mongo: UserMongo | None = await UserMongo.get(user_id)
+
+        if user_mongo is None:
+            raise UserNotFoundError()
+
+        return user_mongo.to_domain()
+
+    async def retrieve_by_email(self, email: str) -> User:
+        user_mongo: UserMongo | None = await UserMongo.find(
+            {"email": email}
+        ).first_or_none()
+
+        if user_mongo is None:
+            raise UserNotFoundError()
+
+        return user_mongo.to_domain()
+
+    async def update(self, user: User) -> None:
+        user_ = _.omit(
+            user.model_dump(mode="json"),
+            "id",
         )
+        filter_ = {"_id": PydanticObjectId(user.id)}
+        operation = {"$set": user_}
 
-        if total_updated != 1:
-            msg = "User not found"
-            raise Exception(msg)
+        result = await UserMongo.find_one(filter_).update(operation)
 
-    def retrieve(self, user_id: str) -> User:
-        user_mongo = UserMongo.objects.get(id=user_id)
-        return user_mongo.to_user()
+        if result.modified_count != 1:
+            raise UserNotFoundError()
 
-    def delete(self, user_id: str) -> None:
-        total_deleted = UserMongo.objects.filter(id=user_id).delete()
-
-        if total_deleted != 1:
-            msg = "User not found"
-            raise Exception(msg)
+    async def delete(self, user_id: str) -> None:
+        filter_ = {"_id": PydanticObjectId(user_id)}
+        await UserMongo.find_one(filter_).delete()

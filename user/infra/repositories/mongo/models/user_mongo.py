@@ -1,40 +1,34 @@
-from mongoengine import Document, fields
+from typing import Annotated
 
-from user.domain.models.user import User
-from user.infra.repositories.mongo.models.query_set_manager import QuerySetManager
+from beanie import Document, Indexed, PydanticObjectId
+
+from user.domain.models import User
 
 
 class UserMongo(Document):
-    id = fields.ObjectIdField(primary_key=True, required=True)
-    first_name = fields.StringField(required=True)
-    last_name = fields.StringField(required=True)
-    email = fields.StringField(required=True, unique=True)
-    password = fields.StringField(required=True)
+    first_name: str
+    last_name: str
+    email: Annotated[str, Indexed(unique=True)]
+    password: str
 
-    objects = QuerySetManager["UserMongo"]()
-    meta = {
-        "collection": "users",
-        "indexes": ["email"],
-        "id_field": "id",
-    }
-
-    def to_user(self) -> User:
-        return User.model_validate(
-            {
-                "id": str(self.id),
-                "first_name": self.first_name,
-                "last_name": self.last_name,
-                "email": self.email,
-                "password": self.password,
-            }
-        )
+    class Settings:
+        name = "users"
 
     @staticmethod
-    def from_user(user: User) -> "UserMongo":
+    def from_domain(user: User) -> "UserMongo":
         return UserMongo(
-            id=user.id,
+            id=PydanticObjectId(user.id),
             first_name=user.first_name,
             last_name=user.last_name,
             email=user.email,
             password=user.password,
+        )
+
+    def to_domain(self) -> User:
+        return User(
+            id=str(self.id),
+            first_name=self.first_name,
+            last_name=self.last_name,
+            email=self.email,
+            password=self.password,
         )

@@ -1,22 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Generic, TypeVar
 
-from user.common.request import Request
-from user.common.response import Response
-
-RequestBody = TypeVar("RequestBody")
-ResponseBody = TypeVar("ResponseBody")
+from fastapi import APIRouter
 
 
-class Controller(ABC, Generic[RequestBody, ResponseBody]):
-    @property
+class Controller(ABC):
     @abstractmethod
-    def path(self) -> str:
-        raise NotImplementedError  # pragma: no cover
-
-    @abstractmethod
-    def execute(
-        self,
-        request: Request[RequestBody],
-    ) -> Response[ResponseBody]:
+    def register(self, router: APIRouter) -> None:
         raise NotImplementedError  # pragma: no cover

@@ -1,21 +1,26 @@
 from abc import ABC, abstractmethod
+from collections.abc import Awaitable
 
-from user.domain.models.user import User
+from user.domain.models import User
 
 
 class UserRepository(ABC):
     @abstractmethod
-    def create(self, user: User) -> None:
+    def create(self, user: User) -> Awaitable[None]:
         raise NotImplementedError  # pragma: no cover
 
     @abstractmethod
-    def update(self, user: User) -> None:
+    def retrieve(self, user_id: str) -> Awaitable[User]:
         raise NotImplementedError  # pragma: no cover
 
     @abstractmethod
-    def retrieve(self, user_id: str) -> User:
+    def retrieve_by_email(self, email: str) -> Awaitable[User]:
         raise NotImplementedError  # pragma: no cover
 
     @abstractmethod
-    def delete(self, user_id: str) -> None:
+    def update(self, user: User) -> Awaitable[None]:
+        raise NotImplementedError  # pragma: no cover
+
+    @abstractmethod
+    def delete(self, user_id: str) -> Awaitable[None]:
         raise NotImplementedError  # pragma: no cover

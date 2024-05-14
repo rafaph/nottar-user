@@ -54,6 +54,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+coverage/
 
 # Translations
 *.mo
@@ -174,5 +175,7 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+# Generated using ignr.py - github.com/Antrikshy/ignr.py
 
 .DS_Store
