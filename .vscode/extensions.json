@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "codeium.codeium",
+        "charliermarsh.ruff",
+        "ms-python.mypy-type-checker",
+        "editorconfig.editorconfig",
+        "tamasfe.even-better-toml",
+        "natqe.reload"
+    ]
+}
