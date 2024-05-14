@@ -1,7 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from fastapi.exceptions import RequestValidationError
 from injector import inject
-from pydantic import ValidationError
 
 from user.common import Controller
 from user.domain.errors import UserEmailInUseError
@@ -19,8 +17,6 @@ class CreateUserController(Controller):
         try:
             output = await self._use_case.execute(input_.to_domain())
             return CreateUserResponse.from_domain(output)
-        except ValidationError as e:
-            raise RequestValidationError(errors=e.errors()) from e
         except UserEmailInUseError as e:
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
