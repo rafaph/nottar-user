@@ -20,19 +20,19 @@ repos:
     hooks:
       - id: format
         name: format
-        entry: pipenv run format
+        entry: pdm run format
         language: system
         stages: [pre-commit]
         pass_filenames: false
       - id: lint
         name: lint
-        entry: pipenv run lint
+        entry: pdm run lint
         language: system
         stages: [pre-commit]
         pass_filenames: false
       - id: test
         name: test
-        entry: pipenv run test-cov
+        entry: pdm run test-cov
         language: system
         stages: [pre-push]
         pass_filenames: false

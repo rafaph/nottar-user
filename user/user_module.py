@@ -7,7 +7,11 @@ from user.config import Config
 from user.domain.repositories import UserRepository
 from user.domain.services import PasswordHasher
 from user.domain.use_cases import CreateUserUseCase
-from user.infra.controllers import CreateUserController, HealthzController
+from user.infra.controllers import (
+    CreateUserController,
+    DeleteUserController,
+    HealthzController,
+)
 from user.infra.repositories.mongo import MongoUserRepository
 from user.infra.repositories.mongo.models import UserMongo
 from user.infra.services import Argon2PasswordHasher
@@ -17,6 +21,7 @@ from user.types import BeanieParams, DocumentModel
 class UserModule(Module):
     _controllers: list[type[Controller]] = [
         CreateUserController,
+        DeleteUserController,
         HealthzController,
     ]
     _document_models: list[DocumentModel] = [

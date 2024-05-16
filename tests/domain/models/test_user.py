@@ -39,5 +39,5 @@ class TestUser:
             UserBuilder().with_password("").build()
 
     @pytest.mark.it("Should not raise ValidationError")
-    def test_not_rise(self) -> None:
+    def test_not_raise(self) -> None:
         UserBuilder().build()

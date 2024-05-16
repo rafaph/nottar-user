@@ -11,5 +11,8 @@ class UserClient:
     async def create(self, body: dict[str, object]) -> httpx.Response:
         return await self._client.post("/", json=body)
 
+    async def delete(self, user_id: str) -> httpx.Response:
+        return await self._client.delete(f"/{user_id}")
+
     async def close(self) -> None:
         await self._client.aclose()
