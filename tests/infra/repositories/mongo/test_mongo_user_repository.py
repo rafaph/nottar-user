@@ -39,7 +39,7 @@ class TestMongoUserRepository:
             assert_that(user_from_db).is_equal_to(user)
 
     @pytest.mark.it(
-        "Should raise UserNotFoundError when trying to retrieve a "
+        "Should raise UserNotFoundError when trying to retrieve an "
         "user by id that does not exist"
     )
     async def test_retrieve_raise_user_not_found(self) -> None:
@@ -67,7 +67,7 @@ class TestMongoUserRepository:
             assert_that(user_from_db).is_equal_to(user)
 
     @pytest.mark.it(
-        "Should raise UserNotFoundError when trying to retrieve a "
+        "Should raise UserNotFoundError when trying to retrieve an "
         "user by email that does not exist"
     )
     async def test_retrieve_raise_user_email_not_found(self) -> None:
@@ -97,7 +97,7 @@ class TestMongoUserRepository:
             assert_that(user_from_db).is_equal_to(user_to_update)
 
     @pytest.mark.it(
-        "Should raise UserNotFoundError when trying to update a "
+        "Should raise UserNotFoundError when trying to update an "
         "user that does not exist"
     )
     async def test_update_raise_user_not_found(self) -> None:
@@ -124,3 +124,17 @@ class TestMongoUserRepository:
             # then
             user_from_db = await db.find_user(user.id)
             assert_that(user_from_db).is_none()
+
+    @pytest.mark.it(
+        "Should raise UserNotFoundError when trying to delete an "
+        "user that does not exist"
+    )
+    async def test_delete_raise_user_not_found(self) -> None:
+        async with DatabaseTest():
+            # given
+            user = UserBuilder().build()
+            sut = MongoUserRepository()
+
+            # when/then
+            with pytest.raises(UserNotFoundError):
+                await sut.delete(user.id)

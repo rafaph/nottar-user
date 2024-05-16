@@ -45,4 +45,7 @@ class MongoUserRepository(UserRepository):
 
     async def delete(self, user_id: str) -> None:
         filter_ = {"_id": PydanticObjectId(user_id)}
-        await UserMongo.find_one(filter_).delete()
+        result = await UserMongo.find_one(filter_).delete()
+
+        if result is None or result.deleted_count != 1:
+            raise UserNotFoundError()
