@@ -1,5 +1,6 @@
-from bson import ObjectId
-from pydantic import BaseModel, EmailStr, Field, field_validator
+from pydantic import BaseModel, EmailStr, Field
+
+from user.domain.models.object_id_str import ObjectIdStr
 
 
 class BaseUser(BaseModel):
@@ -10,13 +11,4 @@ class BaseUser(BaseModel):
 
 
 class User(BaseUser):
-    id: str
-
-    @field_validator("id")
-    @classmethod
-    def _id_validator(cls, value: str) -> str:
-        if not ObjectId.is_valid(value):
-            msg = "Invalid id"
-            raise ValueError(msg)
-
-        return value
+    id: ObjectIdStr
