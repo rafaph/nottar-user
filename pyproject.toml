@@ -144,8 +144,12 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = [
+  # get-attr-with-constant
   "B009",
+  # typing-only-standard-library-import
   "TCH003",
+  # typing-only-first-party-import
+  "TCH001",
 ]
 
 [tool.mypy]

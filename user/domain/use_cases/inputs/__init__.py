@@ -1,7 +1,9 @@
 from .create_user_input import CreateUserInput
 from .delete_user_input import DeleteUserInput
+from .verify_user_input import VerifyUserInput
 
 __all__ = [
     "CreateUserInput",
     "DeleteUserInput",
+    "VerifyUserInput",
 ]

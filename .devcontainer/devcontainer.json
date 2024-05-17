@@ -20,7 +20,10 @@
                 "natqe.reload"
             ],
             "settings": {
-                "mypy-type-checker.importStrategy": "fromEnvironment"
+                "mypy-type-checker.importStrategy": "fromEnvironment",
+                "files.exclude": {
+                  "**/__pycache__": true
+                }
             }
         }
     },
@@ -28,8 +31,6 @@
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "pdm install"
-    // Configure tool-specific properties.
-    // "customizations": {},
     // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
     // "remoteUser": "root"
 }
