@@ -8,8 +8,6 @@ from user.user_module import UserModule
 if __name__ == "__main__":
     try:
         from pytest_cov.embed import cleanup_on_sigterm  # type: ignore
-
-        cleanup_on_sigterm()
     except ImportError:
         pass
     else:
