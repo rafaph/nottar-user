@@ -1,4 +1,5 @@
 from tests.builders.builder import Builder
+
 from user.domain.models import User
 from user.domain.use_cases.inputs import VerifyUserInput
 

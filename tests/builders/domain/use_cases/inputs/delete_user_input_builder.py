@@ -1,6 +1,7 @@
 from bson import ObjectId
 
 from tests.builders.builder import Builder
+
 from user.domain.use_cases.inputs import DeleteUserInput
 
 

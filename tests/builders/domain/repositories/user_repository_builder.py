@@ -2,6 +2,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 from tests.builders.builder import Builder
 from tests.builders.domain.models import UserBuilder
+
 from user.domain.repositories import UserRepository
 
 

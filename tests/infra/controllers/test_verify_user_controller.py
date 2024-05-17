@@ -6,6 +6,7 @@ from fastapi import status
 
 from tests.builders.domain.models import UserBuilder
 from tests.helpers import ServerTest
+
 from user.infra.controllers import VerifyUserController
 from user.infra.services import Argon2PasswordHasher
 

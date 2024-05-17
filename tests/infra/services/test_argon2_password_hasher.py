@@ -8,6 +8,7 @@ from faker import Faker
 from tests.builders.external import (
     Argon2PasswordHasherBuilder,
 )
+
 from user.domain.errors import HashingError
 from user.infra.services import Argon2PasswordHasher
 

@@ -34,6 +34,7 @@ class CreateUserController(Controller):
                 },
                 status.HTTP_201_CREATED: {
                     "description": "User created successfully",
+                    "model": CreateUserResponse,
                 },
             },
         )(self._create_user)

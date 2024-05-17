@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock
 
 from tests.builders.builder import Builder
+
 from user.domain.services import PasswordHasher
 
 

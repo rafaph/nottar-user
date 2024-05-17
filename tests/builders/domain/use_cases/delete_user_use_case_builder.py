@@ -1,5 +1,6 @@
 from tests.builders.builder import Builder
 from tests.builders.domain.repositories import UserRepositoryBuilder
+
 from user.domain.repositories import UserRepository
 from user.domain.use_cases import DeleteUserUseCase
 

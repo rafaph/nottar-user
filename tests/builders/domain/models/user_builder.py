@@ -1,6 +1,7 @@
 from bson import ObjectId
 
 from tests.builders.domain.models.base_user_builder import BaseUserBuilder
+
 from user.domain.models import User
 
 

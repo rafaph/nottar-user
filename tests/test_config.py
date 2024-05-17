@@ -3,6 +3,7 @@ from assertpy import assert_that
 from pytest_mock import MockerFixture
 
 from tests.builders.config_builder import ConfigBuilder
+
 from user.config import Config
 
 

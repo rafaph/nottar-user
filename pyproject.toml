@@ -152,6 +152,9 @@ ignore = [
   "TCH001",
 ]
 
+[tool.ruff.lint.isort]
+forced-separate = ["user"]
+
 [tool.mypy]
 python_version = "3.12"
 plugins = [

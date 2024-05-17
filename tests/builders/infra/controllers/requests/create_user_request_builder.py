@@ -1,4 +1,5 @@
 from tests.builders.domain.models.base_user_builder import BaseUserBuilder
+
 from user.infra.controllers.requests import CreateUserRequest
 
 

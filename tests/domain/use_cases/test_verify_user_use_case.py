@@ -6,6 +6,7 @@ from assertpy import assert_that
 from tests.builders.domain.services import PasswordHasherBuilder
 from tests.builders.domain.use_cases import VerifyUserUseCaseBuilder
 from tests.builders.domain.use_cases.inputs import VerifyUserInputBuilder
+
 from user.domain.errors import UserNotFoundError
 from user.domain.models import User
 from user.domain.repositories import UserRepository

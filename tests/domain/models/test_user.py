@@ -2,6 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from tests.builders.domain.models.user_builder import UserBuilder
+
 from user.domain.models.user import User
 
 

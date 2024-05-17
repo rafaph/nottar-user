@@ -5,6 +5,7 @@ import pytest
 from tests.builders.domain.repositories import UserRepositoryBuilder
 from tests.builders.domain.use_cases import DeleteUserUseCaseBuilder
 from tests.builders.domain.use_cases.inputs import DeleteUserInputBuilder
+
 from user.domain.errors import UserNotFoundError
 from user.domain.use_cases import DeleteUserUseCase
 
