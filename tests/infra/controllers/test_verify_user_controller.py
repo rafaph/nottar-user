@@ -7,8 +7,8 @@ from fastapi import status
 from tests.builders.domain.models import UserBuilder
 from tests.helpers import ServerTest
 
-from user.infra.controllers import VerifyUserController
-from user.infra.services import Argon2PasswordHasher
+from src.infra.controllers import VerifyUserController
+from src.infra.services import Argon2PasswordHasher
 
 
 @pytest.mark.anyio(scope="class")

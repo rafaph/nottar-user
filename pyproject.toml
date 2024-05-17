@@ -46,12 +46,12 @@ dev = [
 ]
 
 [tool.pdm.scripts]
-format = "ruff format user tests main.py"
-lint-ruff = "ruff check --fix user tests main.py"
-lint-mypy = "dmypy run user tests main.py -- --use-fine-grained-cache"
+format = "ruff format src tests main.py"
+lint-ruff = "ruff check --fix src tests main.py"
+lint-mypy = "dmypy run src tests main.py -- --use-fine-grained-cache"
 lint = {composite = ["lint-ruff", "lint-mypy"]}
 test = "pytest tests"
-test-cov = "pytest tests --cov-branch --cov-fail-under=100 --cov=user --cov-report term --cov-report xml:coverage/coverage.xml --cov-report html:coverage --cov-report lcov:coverage/lcov.info"
+test-cov = "pytest tests --cov-branch --cov-fail-under=100 --cov=src --cov-report term --cov-report xml:coverage/coverage.xml --cov-report html:coverage --cov-report lcov:coverage/lcov.info"
 post_install = {shell = "pre-commit install -f --install-hooks 2>&1 1>/dev/null"}
 start = "python main.py"
 
@@ -153,7 +153,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-forced-separate = ["user"]
+forced-separate = ["src"]
 
 [tool.mypy]
 python_version = "3.12"

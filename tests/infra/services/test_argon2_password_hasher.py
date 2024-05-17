@@ -9,8 +9,8 @@ from tests.builders.external import (
     Argon2PasswordHasherBuilder,
 )
 
-from user.domain.errors import HashingError
-from user.infra.services import Argon2PasswordHasher
+from src.domain.errors import HashingError
+from src.infra.services import Argon2PasswordHasher
 
 
 @pytest.mark.describe(Argon2PasswordHasher.__name__)

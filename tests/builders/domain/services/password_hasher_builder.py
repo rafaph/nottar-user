@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 from tests.builders.builder import Builder
 
-from user.domain.services import PasswordHasher
+from src.domain.services import PasswordHasher
 
 
 class PasswordHasherBuilder(Builder[PasswordHasher]):

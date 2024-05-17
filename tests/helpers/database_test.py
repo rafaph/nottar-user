@@ -6,7 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 
 from tests.helpers.user_database import UserDatabase
 
-from user.infra.repositories.mongo.models import UserMongo
+from src.infra.repositories.mongo.models import UserMongo
 
 
 class DatabaseTest:

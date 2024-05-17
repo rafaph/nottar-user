@@ -1,6 +1,6 @@
 from tests.builders.domain.models.base_user_builder import BaseUserBuilder
 
-from user.infra.controllers.requests import CreateUserRequest
+from src.infra.controllers.requests import CreateUserRequest
 
 
 class CreateUserRequestBuilder(BaseUserBuilder[CreateUserRequest]):

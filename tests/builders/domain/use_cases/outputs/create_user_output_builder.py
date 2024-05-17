@@ -2,8 +2,8 @@ from bson import ObjectId
 
 from tests.builders.builder import Builder
 
-from user.domain.models import User
-from user.domain.use_cases.outputs import CreateUserOutput
+from src.domain.models import User
+from src.domain.use_cases.outputs import CreateUserOutput
 
 
 class CreateUserOutputBuilder(Builder[CreateUserOutput]):

@@ -8,8 +8,8 @@ from tests.builders.domain.repositories import UserRepositoryBuilder
 from tests.builders.domain.use_cases import CreateUserUseCaseBuilder
 from tests.builders.domain.use_cases.inputs import CreateUserInputBuilder
 
-from user.domain.errors import UserEmailInUseError, UserNotFoundError
-from user.domain.use_cases import CreateUserUseCase
+from src.domain.errors import UserEmailInUseError, UserNotFoundError
+from src.domain.use_cases import CreateUserUseCase
 
 
 @pytest.mark.anyio(scope="class")

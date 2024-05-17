@@ -7,7 +7,7 @@ from tests.builders.domain.models import UserBuilder
 from tests.builders.infra.controllers.requests import CreateUserRequestBuilder
 from tests.helpers import ServerTest
 
-from user.infra.controllers import CreateUserController
+from src.infra.controllers import CreateUserController
 
 
 @pytest.mark.anyio(scope="class")

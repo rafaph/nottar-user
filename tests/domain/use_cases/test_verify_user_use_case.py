@@ -7,11 +7,11 @@ from tests.builders.domain.services import PasswordHasherBuilder
 from tests.builders.domain.use_cases import VerifyUserUseCaseBuilder
 from tests.builders.domain.use_cases.inputs import VerifyUserInputBuilder
 
-from user.domain.errors import UserNotFoundError
-from user.domain.models import User
-from user.domain.repositories import UserRepository
-from user.domain.services import PasswordHasher
-from user.domain.use_cases import VerifyUserUseCase
+from src.domain.errors import UserNotFoundError
+from src.domain.models import User
+from src.domain.repositories import UserRepository
+from src.domain.services import PasswordHasher
+from src.domain.use_cases import VerifyUserUseCase
 
 
 @pytest.mark.anyio(scope="class")

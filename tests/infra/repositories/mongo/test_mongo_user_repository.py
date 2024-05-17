@@ -4,8 +4,8 @@ from assertpy import assert_that
 from tests.builders.domain.models import UserBuilder
 from tests.helpers import DatabaseTest
 
-from user.domain.errors import UserNotFoundError
-from user.infra.repositories.mongo import MongoUserRepository
+from src.domain.errors import UserNotFoundError
+from src.infra.repositories.mongo import MongoUserRepository
 
 
 @pytest.mark.anyio(scope="class")

@@ -4,7 +4,7 @@ from bson import ObjectId
 from faker import Faker
 from pydantic import TypeAdapter, ValidationError
 
-from user.domain.models import ObjectIdStr
+from src.domain.models import ObjectIdStr
 
 
 @pytest.mark.describe("ObjectIdStr")

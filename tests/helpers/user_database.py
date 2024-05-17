@@ -1,8 +1,8 @@
 from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from user.domain.models import User
-from user.infra.repositories.mongo.models import UserMongo
+from src.domain.models import User
+from src.infra.repositories.mongo.models import UserMongo
 
 
 class UserDatabase:

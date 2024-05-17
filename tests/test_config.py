@@ -4,7 +4,7 @@ from pytest_mock import MockerFixture
 
 from tests.builders.config_builder import ConfigBuilder
 
-from user.config import Config
+from src.config import Config
 
 
 @pytest.mark.describe(Config.__name__)

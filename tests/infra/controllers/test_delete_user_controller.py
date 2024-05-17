@@ -6,7 +6,7 @@ from fastapi import status
 from tests.builders.domain.models import UserBuilder
 from tests.helpers import ServerTest
 
-from user.infra.controllers import DeleteUserController
+from src.infra.controllers import DeleteUserController
 
 
 @pytest.mark.anyio(scope="class")

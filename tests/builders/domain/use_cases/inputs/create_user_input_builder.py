@@ -1,6 +1,6 @@
 from tests.builders.domain.models.base_user_builder import BaseUserBuilder
 
-from user.domain.use_cases.inputs import CreateUserInput
+from src.domain.use_cases.inputs import CreateUserInput
 
 
 class CreateUserInputBuilder(BaseUserBuilder[CreateUserInput]):

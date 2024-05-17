@@ -2,9 +2,9 @@ from tests.builders.builder import Builder
 from tests.builders.domain.repositories import UserRepositoryBuilder
 from tests.builders.domain.services import PasswordHasherBuilder
 
-from user.domain.repositories import UserRepository
-from user.domain.services import PasswordHasher
-from user.domain.use_cases import VerifyUserUseCase
+from src.domain.repositories import UserRepository
+from src.domain.services import PasswordHasher
+from src.domain.use_cases import VerifyUserUseCase
 
 
 class VerifyUserUseCaseBuilder(Builder[VerifyUserUseCase]):

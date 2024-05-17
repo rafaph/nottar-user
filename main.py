@@ -1,9 +1,9 @@
-import user.logger  # noqa: F401, I001
+import src.logger  # noqa: F401, I001
 
 from injector import Injector
 
-from user.app import App
-from user.user_module import UserModule
+from src.app import App
+from src.user_module import UserModule
 
 if __name__ == "__main__":
     try:
