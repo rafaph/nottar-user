@@ -22,7 +22,15 @@ class UserDatabase:
             }
         )
 
-    async def create_user(self, user: User) -> None:
+    async def create_user(
+        self,
+        user: User,
+    ) -> None:
         data = user.model_dump(mode="json")
 
-        await self._collection.insert_one({"_id": ObjectId(data.pop("id")), **data})
+        await self._collection.insert_one(
+            {
+                "_id": ObjectId(data.pop("id")),
+                **data,
+            }
+        )
