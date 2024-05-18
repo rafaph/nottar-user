@@ -11,6 +11,7 @@ from src.infra.controllers import (
     CreateUserController,
     DeleteUserController,
     HealthzController,
+    UpdateUserController,
     VerifyUserController,
 )
 from src.infra.repositories.mongo import MongoUserRepository
@@ -24,6 +25,7 @@ class UserModule(Module):
         CreateUserController,
         DeleteUserController,
         HealthzController,
+        UpdateUserController,
         VerifyUserController,
     ]
     _document_models: list[DocumentModel] = [
