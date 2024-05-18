@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "lint",
+            "type": "shell",
+            "command": "pdm run lint",
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "format",
+            "type": "shell",
+            "command": "pdm run format",
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "pdm run test",
+            "presentation": {
+                "reveal": "always"
+            }
+        },
+        {
+            "label": "test-cov",
+            "type": "shell",
+            "command": "pdm run test-cov",
+            "presentation": {
+                "reveal": "always"
+            }
+        }
+    ]
+}
