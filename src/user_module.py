@@ -17,6 +17,7 @@ from src.infra.controllers import (
     CreateUserController,
     DeleteUserController,
     HealthzController,
+    RetrieveUserController,
     UpdateUserController,
     VerifyUserController,
 )
@@ -31,6 +32,7 @@ class UserModule(Module):
         CreateUserController,
         DeleteUserController,
         HealthzController,
+        RetrieveUserController,
         UpdateUserController,
         VerifyUserController,
     ]
