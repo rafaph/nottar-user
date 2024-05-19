@@ -25,4 +25,8 @@ class VerifyUserUseCase(UseCase[VerifyUserInput, VerifyUserOutput]):
         if not self._password_hasher.verify(hash_, input_.password):
             raise UserNotFoundError()
 
+        if self._password_hasher.needs_rehash(hash_):
+            user.password = self._password_hasher.hash(input_.password)
+            await self._user_repository.update(user)
+
         return VerifyUserOutput.from_user(user)
