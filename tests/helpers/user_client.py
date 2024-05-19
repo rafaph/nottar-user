@@ -17,6 +17,9 @@ class UserClient:
     async def update(self, user_id: str, body: dict[str, object]) -> httpx.Response:
         return await self._client.patch(f"/{user_id}", json=body)
 
+    async def retrieve(self, user_id: str) -> httpx.Response:
+        return await self._client.get(f"/{user_id}")
+
     async def verify(self, body: dict[str, object]) -> httpx.Response:
         return await self._client.post("/verify", json=body)
 

@@ -6,11 +6,18 @@ from src.common import Controller
 from src.config import Config
 from src.domain.repositories import UserRepository
 from src.domain.services import PasswordHasher
-from src.domain.use_cases import CreateUserUseCase
+from src.domain.use_cases import (
+    CreateUserUseCase,
+    DeleteUserUseCase,
+    RetrieveUserUseCase,
+    UpdateUserUseCase,
+    VerifyUserUseCase,
+)
 from src.infra.controllers import (
     CreateUserController,
     DeleteUserController,
     HealthzController,
+    RetrieveUserController,
     UpdateUserController,
     VerifyUserController,
 )
@@ -25,6 +32,7 @@ class UserModule(Module):
         CreateUserController,
         DeleteUserController,
         HealthzController,
+        RetrieveUserController,
         UpdateUserController,
         VerifyUserController,
     ]
@@ -61,6 +69,10 @@ class UserModule(Module):
 
         # Use cases
         binder.bind(CreateUserUseCase, to=CreateUserUseCase, scope=singleton)
+        binder.bind(DeleteUserUseCase, to=DeleteUserUseCase, scope=singleton)
+        binder.bind(RetrieveUserUseCase, to=RetrieveUserUseCase, scope=singleton)
+        binder.bind(UpdateUserUseCase, to=UpdateUserUseCase, scope=singleton)
+        binder.bind(VerifyUserUseCase, to=VerifyUserUseCase, scope=singleton)
 
         # Controllers
         for controller in self._controllers:

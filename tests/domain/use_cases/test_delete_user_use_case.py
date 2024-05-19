@@ -12,7 +12,7 @@ from src.domain.use_cases import DeleteUserUseCase
 
 @pytest.mark.anyio(scope="class")
 @pytest.mark.describe(DeleteUserUseCase.__name__)
-class TestCreateUserUseCase:
+class TestDeleteUserUseCase:
     @pytest.mark.it("Should delete an user")
     async def test_delete_user(self) -> None:
         # given
