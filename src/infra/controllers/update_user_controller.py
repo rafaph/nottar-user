@@ -37,8 +37,10 @@ class UpdateUserController(Controller):
             ) from e
 
     def register(self, router: APIRouter) -> None:
-        router.patch(
+        router.add_api_route(
             "/{user_id}",
+            self._update_user,
+            methods=["PATCH"],
             status_code=status.HTTP_200_OK,
             responses={
                 status.HTTP_200_OK: {
@@ -56,4 +58,4 @@ class UpdateUserController(Controller):
                     "model": ErrorResponse[str],
                 },
             },
-        )(self._update_user)
+        )

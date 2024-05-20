@@ -31,8 +31,10 @@ class DeleteUserController(Controller):
             ) from e
 
     def register(self, router: APIRouter) -> None:
-        router.delete(
+        router.add_api_route(
             "/{user_id}",
+            self._delete_user,
+            methods=["DELETE"],
             status_code=status.HTTP_204_NO_CONTENT,
             response_class=Response,
             responses={
@@ -46,4 +48,4 @@ class DeleteUserController(Controller):
                     "description": "User deleted successfully",
                 },
             },
-        )(self._delete_user)
+        )

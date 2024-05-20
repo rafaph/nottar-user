@@ -8,7 +8,9 @@ class HealthzController(Controller):
         pass
 
     def register(self, router: APIRouter) -> None:
-        router.get(
+        router.add_api_route(
             "/healthz",
+            self._healthz,
+            methods=["GET"],
             status_code=status.HTTP_204_NO_CONTENT,
-        )(self._healthz)
+        )

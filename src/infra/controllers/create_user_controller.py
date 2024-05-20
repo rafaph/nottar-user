@@ -24,8 +24,10 @@ class CreateUserController(Controller):
             ) from e
 
     def register(self, router: APIRouter) -> None:
-        router.post(
+        router.add_api_route(
             "/",
+            self._create_user,
+            methods=["POST"],
             status_code=status.HTTP_201_CREATED,
             responses={
                 status.HTTP_409_CONFLICT: {
@@ -37,4 +39,4 @@ class CreateUserController(Controller):
                     "model": CreateUserResponse,
                 },
             },
-        )(self._create_user)
+        )

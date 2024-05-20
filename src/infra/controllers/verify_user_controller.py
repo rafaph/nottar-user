@@ -24,8 +24,10 @@ class VerifyUserController(Controller):
             ) from e
 
     def register(self, router: APIRouter) -> None:
-        router.post(
+        router.add_api_route(
             "/verify",
+            self._verify_user,
+            methods=["POST"],
             status_code=status.HTTP_200_OK,
             responses={
                 status.HTTP_401_UNAUTHORIZED: {
@@ -37,4 +39,4 @@ class VerifyUserController(Controller):
                     "model": VerifyUserResponse,
                 },
             },
-        )(self._verify_user)
+        )

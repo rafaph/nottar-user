@@ -33,8 +33,10 @@ class RetrieveUserController(Controller):
             ) from e
 
     def register(self, router: APIRouter) -> None:
-        router.get(
+        router.add_api_route(
             "/{user_id}",
+            self._retrieve_user,
+            methods=["GET"],
             status_code=status.HTTP_200_OK,
             responses={
                 status.HTTP_404_NOT_FOUND: {
@@ -48,4 +50,4 @@ class RetrieveUserController(Controller):
                     "model": RetrieveUserResponse,
                 },
             },
-        )(self._retrieve_user)
+        )
